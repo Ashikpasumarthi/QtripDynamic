@@ -274,3 +274,28 @@ input[type="number"] {
   width: fit-content;
   height: 4rem;
 }
+
+.containerImages {
+  width: 16rem;
+  height: 10rem;
+  border-radius: 0.5rem 0.5rem 0rem 0rem;
+}
+
+/* .containerImages>div{
+  display: flex
+;
+    flex-direction: row;
+    gap: 5rem;
+    width: fit-content;
+} */
+
+.newContainerImages {
+  /* width: fit-content; */
+  display: flex;
+  flex-direction: column;
+  width: 16rem !important;
+  justify-content: center;
+  align-items: center;
+  border: 0.1rem solid lightgray;
+    border-radius: 0.5rem;
+}
