@@ -1,5 +1,35 @@
 import config from "../conf/index.js";
 
+
+
+// let newFunction = document.createElement("button");
+// newFunction.addEventListener("click",(e)=>{
+//   (async () => {
+//     // POST request using fetch with async/await
+//     // const element = document.querySelector('#post-request-async-await .article-id');
+//     const requestOptions = {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//           category: "park",
+//           costPerHead: 20,
+//           currency: "INR",
+//           duration: 4,
+//           image: "",
+//           name: "park",
+//           id: "123456",
+//         })
+//     };
+    
+//     const response = await fetch(`${config.backendEndpoint}/adventures/detail`, requestOptions);
+//     const data = await response.json();
+//     addAdventureToDOM(data)
+//     // element.innerHTML = data.id;
+// })();  
+
+// })
+
+
 //Implementation to extract city from query params
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
@@ -24,46 +54,94 @@ async function fetchAdventures(city) {
     console.log(newAdventureData);
     return newAdventureData;
   } catch (err) {
-    alert(err);
+    // alert(err);
     return null;
   }
 }
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures
+// function addAdventureToDOM(adventures) {
+//   // TODO: MODULE_ADVENTURES
+//   // 1. Populate the Adventure Cards and insert those details into the DOM
+//   const dataContainer = document.getElementById("data");
+//   adventures.forEach((adventure) => {
+//     const { id, category, name, image, costPerHead, currency, duration } =
+//       adventure;
+//     const newContainer = document.createElement("div");
+//     newContainer.className = "newContainerImages";
+//     newContainer.id = id;
+//     newContainer.innerHTML = `<a href=${id}><img src=${image} class="containerImages"/></a>
+//     <div style="display: flex; 
+//         flex-direction: row;
+//         gap: 5rem;
+//         width: fit-content;">
+//     <h6 style="white-space: pre-line">${name}</h6>
+//     <h6>${costPerHead}</h6>
+//     </div>
+//     <div style="display: flex;
+//     flex-direction: row;
+//     gap: 10rem;
+//     width: fit-content;">
+//     <h6>${currency}</h6>
+//     <h6>${duration}</h6>
+//     </div>`;
+
+//     dataContainer.append(newContainer);
+//   });
+//   // newContainer.style.width = "fit-content !important";
+//   // img.style.width = "15rem";
+//   // newContainer.style.border = "0.1rem solid gray";
+//   // newContainer.style.borderRadius = "0.5rem"
+
+  
+// }
 function addAdventureToDOM(adventures) {
-  // TODO: MODULE_ADVENTURES
-  // 1. Populate the Adventure Cards and insert those details into the DOM
-  const dataContainer = document.getElementById("data");
-  adventures.forEach((adventure) => {
-    const { id, category, name, image, costPerHead, currency, duration } =
-      adventure;
-    const newContainer = document.createElement("div");
-    newContainer.className = "newContainerImages";
-    newContainer.id = id;
-    newContainer.innerHTML = `<img src=${image} class="containerImages"/>
-    <div style="display: flex; 
-        flex-direction: row;
-        gap: 5rem;
-        width: fit-content;">
-    <h6 style="white-space: pre-line">${name}</h6>
-    <h6>${costPerHead}</h6>
-    </div>
-    <div style="display: flex;
-    flex-direction: row;
-    gap: 10rem;
-    width: fit-content;">
-    <h6>${currency}</h6>
-    <h6>${duration}</h6>
-    </div>`;
+  // const dataContainer = document.getElementById("data");
+  // adventures.forEach((adventure) => {
+  //   const { id, name, image, costPerHead, currency, duration,category } = adventure;
+  //   const newContainer = document.createElement("div");
+  //   newContainer.className = "newContainerImages";
+  //   newContainer.id = id;
+  //   console.log(adventure.id)
 
-    dataContainer.append(newContainer);
-  });
-  // newContainer.style.width = "fit-content !important";
-  img.style.width = "15rem";
-  newContainer.style.border = "0.1rem solid gray";
-  newContainer.style.borderRadius = "0.5rem"
+  //   newContainer.innerHTML = `
+  //     <a href="detail/?adventure=${adventures.id}" id="${id}">
+  //       <img src="${image}" class="containerImages" alt="${name}"/>
+  //     </a>
+  //     <div class="adventure-details">
+  //       <h6>${name}</h6>
+  //       <h6>${costPerHead} ${currency}</h6>
+  //       <h6>Duration: ${duration} hrs</h6>
+  //     </div>
+  //   `;
+
+  //   dataContainer.append(newContainer);
+  // });
+
+  for(let i=0;i<adventures.length;i++)
+  {
+    var div=document.createElement("div");
+    div.setAttribute("class", "col-12 col-sm-6 col-lg-3 mb-3");
+    div.innerHTML = `
+      <a id=${adventures[i].id} href="detail/?adventure=${adventures[i].id}">
+        <div class="card activity-card">
+          <img src=${adventures[i].image}>
+            <div class="category-banner">${adventures[i].category}</div>
+            <div class="card-body col-md-12 mt-2">
+              <div class="d-flex justify-content-between">
+                <p>${adventures[i].name}</p>
+                <p>₹${adventures[i].costPerHead}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p>Duration</p>
+                <p>${adventures[i].duration} Hours</p>
+              </div>
+            </div>
+        </div>
+      </a>`
+    document.getElementById("data").append(div);
+  }
 }
-
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.
 function filterByDuration(list, low, high) {
   // TODO: MODULE_FILTERS
