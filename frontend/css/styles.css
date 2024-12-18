@@ -299,3 +299,15 @@ input[type="number"] {
   border: 0.1rem solid lightgray;
     border-radius: 0.5rem;
 }
+
+#category-list {
+ display: flex;
+ flex-direction: row;
+ gap: 3rem;
+}
+
+.filter-pill{
+  border: 0.1rem solid orange;
+  border-radius: 3.3rem;
+  padding: 0.2rem 0.7rem;
+}
