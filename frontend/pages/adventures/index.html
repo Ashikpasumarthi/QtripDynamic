@@ -108,10 +108,7 @@
             generateFilterPillsAndUpdateDOM
         } from "../../modules/adventures_page.js";
 
-        // Declaring global variable adventure----adventures ek array hai nd uske andr objects hai with id=city name and 
-        //differnet categories of adventures ie: another array named adventures inside each city obj. With this adventures array there are various objects again 
-        //and it has one key as category too... Go to db.json to check.
-
+        // Declaring global variable adventure
         let adventures;
 
         //Checks if filters are available in local storage and sets the value accordingly
@@ -219,7 +216,6 @@
             filters["category"] = [];
             let filteredAdventures = filterFunction(adventures, filters);
             addAdventureToDOM(filteredAdventures);
-           
             // TODO: MODULE_FILTERS
             // 1. Invoke saveFiltersToLocalStorage here
         }

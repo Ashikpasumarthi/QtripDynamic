@@ -3,7 +3,11 @@ import config from "../conf/index.js";
 async function init() {
   //Fetches list of all cities along with their images and description
   let cities = await fetchCities();
+<<<<<<< HEAD
 console.log(cities)
+=======
+
+>>>>>>> 13ea157302ae48d1eb3fd466abcd5e8c0fde7d8a
   //Updates the DOM with the cities
   if (cities) {
     cities.forEach((key) => {
@@ -14,6 +18,7 @@ console.log(cities)
 
 //Implementation of fetch call
 async function fetchCities() {
+<<<<<<< HEAD
   console.log(config.backendEndpoint + "/cities");
   // TODO: MODULE_CITIES
   // 1. Fetch cities using the Backend API and return the data
@@ -76,6 +81,18 @@ function addCityToDOM(id, city, description, image) {
   //         </div>
   // TODO: MODULE_CITIES
   // 1. Populate the City details and insert those details into the DOM
+=======
+  // TODO: MODULE_CITIES
+  // 1. Fetch cities using the Backend API and return the data
+
+}
+
+//Implementation of DOM manipulation to add cities
+function addCityToDOM(id, city, description, image) {
+  // TODO: MODULE_CITIES
+  // 1. Populate the City details and insert those details into the DOM
+
+>>>>>>> 13ea157302ae48d1eb3fd466abcd5e8c0fde7d8a
 }
 
 export { init, fetchCities, addCityToDOM };
