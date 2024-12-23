@@ -37,7 +37,7 @@ async function fetchAdventureDetails(adventureId) {
     console.log("Fetched Adventure Details:", newData);
     return newData;
   } catch (err) {
-    console.error("Error fetching adventure details:", err.message);
+    console.log("Error fetching adventure details:", err.message);
     return null;
   }
   // Place holder for functionality to work in the Stubs 
@@ -48,69 +48,71 @@ function addAdventureDetailsToDOM(adventure) {
   // Add adventure name and subtitle to the DOM
   let heading = document.getElementById("adventure-name");
   let para = document.getElementById("adventure-subtitle");
-  heading.innerText = adventure.name;
-  para.innerText = adventure.subtitle;
+  heading.textContent = adventure.name;
+  para.textContent = adventure.subtitle;
 
+  // Call the function to add the Bootstrap gallery
+  addBootstrapPhotoGallery(adventure.images);
+
+  // Add adventure content to the DOM
+  let content = document.getElementById("adventure-content");
+  content.textContent = adventure.content;
+}
+
+// Implementation of Bootstrap gallery component
+function addBootstrapPhotoGallery(imagesArray) {
   // Get the photo gallery container
-  let images = document.getElementById("photo-gallery");
+  let imagesContainer = document.getElementById("photo-gallery");
 
-  // Clear previous images if any
-  images.innerHTML = `
+  // Clear previous content
+  imagesContainer.innerHTML = `
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <ol class="carousel-indicators"></ol>
+      <div class="carousel-indicators"></div>
       <div class="carousel-inner"></div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        
+       
       </a>
       <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        
+       
       </a>
     </div>`;
 
   // Select dynamically created elements
-  let indicators = images.querySelector(".carousel-indicators");
-  let innerCarousel = images.querySelector(".carousel-inner");
+  let indicators = imagesContainer.querySelector(".carousel-indicators");
+  let innerCarousel = imagesContainer.querySelector(".carousel-inner");
 
-  // Loop through imagesArray to populate the carousel
-  adventure.images.forEach((ele, index) => {
+  // Populate the carousel with images
+  imagesArray.forEach((imageUrl, index) => {
     // Create a carousel item
-    let carouselElement = document.createElement("div");
-    carouselElement.classList.add("carousel-item");
-    if (index === 0) carouselElement.classList.add("active"); // Add active class for the first item
+    let carouselItem = document.createElement("div");
+    carouselItem.classList.add("carousel-item");
+    if (index === 0) carouselItem.classList.add("active"); // Add 'active' class for the first image
 
     // Create an image element
     let img = document.createElement("img");
-    img.src = ele; // Assuming 'ele' is the URL of the image
-    img.classList.add("d-block", "w-100" ,"activity-card-image");
+    img.src = imageUrl; // Set the image URL
+    img.alt = `Adventure Image ${index + 1}`; // Add alt text for accessibility
+    img.classList.add("d-block", "w-100", "activity-card-image");
 
     // Append the image to the carousel item
-    carouselElement.appendChild(img);
-    innerCarousel.appendChild(carouselElement); // Append the carousel item to the carousel-inner
+    carouselItem.appendChild(img);
+    innerCarousel.appendChild(carouselItem); // Append carousel item to the inner carousel
 
-    // Create an indicator for each image
-    let indicator = document.createElement("li");
+    // Create an indicator
+    let indicator = document.createElement("button");
+    indicator.type = "button";
     indicator.setAttribute("data-bs-target", "#carouselExampleIndicators");
     indicator.setAttribute("data-bs-slide-to", index.toString());
-    if (index === 0) indicator.classList.add("active"); // Add active class for the first indicator
+    if (index === 0) indicator.classList.add("active"); // Add 'active' class for the first indicator
+    indicator.setAttribute("aria-current", index === 0 ? "true" : "false");
+    indicator.setAttribute("aria-label", `Slide ${index + 1}`);
 
-    indicators.appendChild(indicator); // Append the indicator
+    // Append the indicator
+    indicators.appendChild(indicator);
   });
-
-  // Add adventure content to the DOM
-  let content = document.getElementById("adventure-content");
-  content.innerText = adventure.content;
 }
-
-
-//Implementation of bootstrap gallery component
-function addBootstrapPhotoGallery(images) {
-  // TODO: MODULE_ADVENTURE_DETAILS
-  // 1. Add the bootstrap carousel to show the Adventure images
-
-}
-
 //Implementation of conditional rendering of DOM based on availability
 function conditionalRenderingOfReservationPanel(adventure) {
   // TODO: MODULE_RESERVATIONS
