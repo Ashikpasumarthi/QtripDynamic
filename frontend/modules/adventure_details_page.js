@@ -117,6 +117,10 @@ function addBootstrapPhotoGallery(imagesArray) {
 function conditionalRenderingOfReservationPanel(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. If the adventure is already reserved, display the sold-out message.
+  if(adventure.available == false){
+    let element = document.getElementById("reservation-panel-sold-out");
+    element.setAttribute("display","none");
+  }
 
 }
 

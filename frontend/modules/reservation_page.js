@@ -4,10 +4,23 @@ import config from "../conf/index.js";
 async function fetchReservations() {
   // TODO: MODULE_RESERVATIONS
   // 1. Fetch Reservations by invoking the REST API and return them
+  let url = `${config.backendEndpoint}/reservations/new`;
+  console.log(url);
 
+  try {
+    let fetchData = await fetch(url);
+    if (!fetchData.ok) {
+      throw new Error(`HTTP error! Status: ${fetchData.status}`);
+    }
 
+    let newData = await fetchData.json();
+    console.log("Fetched Adventure Details:", newData);
+    return newData;
+  } catch (err) {
+    console.log("Error fetching adventure details:", err.message);
+    return null;
+  }
   // Place holder for functionality to work in the Stubs
-  return null;
 }
 
 //Function to add reservations to the table. Also; in case of no reservations, display the no-reservation-banner, else hide it.

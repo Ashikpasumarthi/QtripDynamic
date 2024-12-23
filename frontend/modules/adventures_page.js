@@ -198,7 +198,6 @@ function saveFiltersToLocalStorage(filters) {
   // TODO: MODULE_FILTERS
   // 1. Store the filters as a String to localStorage
 
-<<<<<<< HEAD
   // let savedData = localStorage.setItem("filters",JSON.stringify(filters));
   // getFiltersFromLocalStorage(savedData)
   // return true;
@@ -213,17 +212,6 @@ function getFiltersFromLocalStorage(filters) {
    if(filters){
     return JSON.parse(filters);
    }
-=======
-  return true;
-}
-
-//Implementation of localStorage API to get filters from local storage. This should get called whenever the DOM is loaded.
-function getFiltersFromLocalStorage() {
-  // TODO: MODULE_FILTERS
-  // 1. Get the filters from localStorage and return String read as an object
-
-
->>>>>>> fd7af8b4a3181ef2a4513d2bcd7834cac44efcea
   // Place holder for functionality to work in the Stubs
   return null;
 }
@@ -236,7 +224,6 @@ function generateFilterPillsAndUpdateDOM(filters) {
   // TODO: MODULE_FILTERS
   // 1. Use the filters given as input, update the Duration Filter value and Generate Category Pills
 
-<<<<<<< HEAD
   let parentDiv = document.getElementById("category-list");
 
   parentDiv.innerHTML = "";
@@ -259,8 +246,6 @@ function generateFilterPillsAndUpdateDOM(filters) {
     });
   }
   
-=======
->>>>>>> fd7af8b4a3181ef2a4513d2bcd7834cac44efcea
 }
 export {
   getCityFromURL,
