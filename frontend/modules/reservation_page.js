@@ -4,7 +4,7 @@ import config from "../conf/index.js";
 async function fetchReservations() {
   // TODO: MODULE_RESERVATIONS
   // 1. Fetch Reservations by invoking the REST API and return them
-  let url = `${config.backendEndpoint}/reservations/new`;
+  let url = `${config.backendEndpoint}/reservations`;
   console.log(url);
 
   try {
@@ -25,10 +25,60 @@ async function fetchReservations() {
 
 //Function to add reservations to the table. Also; in case of no reservations, display the no-reservation-banner, else hide it.
 function addReservationToTable(reservations) {
-  // TODO: MODULE_RESERVATIONS
-  // 1. Add the Reservations to the HTML DOM so that they show up in the table
+  // Check if reservations exist
+  if (reservations.length > 0) {
+    document.getElementById("no-reservation-banner").style.display = "none"; // Hide the no-reservation banner
+    let table = document.getElementById("reservation-table"); // Get the reservation table
 
+    reservations.forEach((ele) => {
+      let tr = document.createElement("tr"); // Create a new row
+
+      // Format the date in D/MM/YYYY format
+      let date = new Date(ele.date); // Parse date from the reservation
+      let formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`; // Format as D/MM/YYYY
+
+      // Format the time in "D Month YYYY, hh:mm:ss am/pm" format
+      let time = new Date(ele.time); // Parse time from the reservation
+      let formattedTime = time.toLocaleString("en-IN", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: true,
+      });
+
+      // Populate the row
+      tr.innerHTML = `
+        <td>${ele.id}</td>
+        <td>${ele.name}</td>
+        <td>${ele.adventureName}</td>
+        <td>${ele.person}</td>
+        <td>${formattedDate}</td>
+        <td>${ele.price}</td>
+        <td>${formattedTime}</td>
+        <td>
+          <a href=${config.backendEndpoint}/adventures/detail?adventure=${ele.adventure}
+             class="reservation-action reservation-visit-button" 
+             id="${ele.id}">
+             Visit Adventure
+          </a>
+        </td>
+      `;
+
+      // Append the row to the table
+      table.appendChild(tr);
+    });
+  } else {
+    // If no reservations, show the no-reservation-banner
+    document.getElementById("no-reservation-banner").style.display = "block";
+  }
+
+  
   //Conditionally render the no-reservation-banner and reservation-table-parent
+
+
 
   /*
     Iterating over reservations, adding it to table (into div with class "reservation-table") and link it correctly to respective adventure
